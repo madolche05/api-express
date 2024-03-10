@@ -37,5 +37,6 @@ const insertUser = async (req, res) => {
 
 module.exports = {
     getUsers,
-    getUserbyname
+    getUserbyname,
+    insertUser
 }

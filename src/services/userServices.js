@@ -27,5 +27,6 @@ const insertUser = async (name, email, password) => {
 
 module.exports = {
     getUsers,
-    getUserbyname
+    getUserbyname,
+    insertUser
 }
