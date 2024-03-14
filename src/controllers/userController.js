@@ -33,7 +33,18 @@ const insertUser = async (req, res) => {
     }
 }
 
-
+const updateUser = async (req, res) => {
+    const { id } = req.params;
+    const { name, email, password } = req.body;
+    try {
+        const user = await userService.updateUser(id, name, email, password);
+        if (!user) return res.status(404).send('User not found');
+        res.send(user);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error updating user');
+    }
+}
 
 module.exports = {
     getUsers,
