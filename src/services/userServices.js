@@ -25,8 +25,18 @@ const insertUser = async (name, email, password) => {
     return user;
 }
 
+
+
+
+
+
+
+
+
+
 module.exports = {
     getUsers,
     getUserbyname,
-    insertUser
+    insertUser,
+    loginUser
 }

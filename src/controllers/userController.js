@@ -11,12 +11,10 @@ const getUsers = async (req, res) => {
 }
 
 const getUserbyname = async (req, res) => {
+    const { name } = req.params;
     try {
-        const { name } = req.params;
         const user = await userService.getUserbyname(name);
-        if (!user) {
-            return res.status(404).send('User not found');
-        }
+        if (!user) return res.status(404).send('User not found');
         res.send(user);
     } catch (error) {
         console.error(error);
@@ -34,6 +32,8 @@ const insertUser = async (req, res) => {
         res.status(500).send('Error inserting user');
     }
 }
+
+
 
 module.exports = {
     getUsers,
