@@ -39,6 +39,18 @@ const updateUser = async (id, name, email, password) => {
     return user;
 }
 
+const loginUser = async (email, password) => {
+    const user = await prisma.user.findFirst({
+        where: {
+            email,
+            password
+        }
+    });
+    return user;
+}
+
+
+
 
 
 

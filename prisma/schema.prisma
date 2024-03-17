@@ -13,10 +13,38 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Definisi model untuk entitas User
 model User {
-  id       Int    @id @default(autoincrement())
-  name     String @unique
-  email    String @unique
+  id       Int     @id @default(autoincrement())
+  name     String
+  email    String  @unique
   password String
+  // Relasi dengan entitas Job untuk mengetahui pekerjaan apa yang diposting oleh user
+  jobs     Job[]
 }
+
+model Job {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  company     String
+  location    String
+  salary      Float?
+  // Relasi dengan entitas User untuk mengetahui siapa yang memposting pekerjaan
+  postedBy    User     @relation(fields: [postedById], references: [id])
+  postedById  Int
+  // Relasi dengan entitas Category untuk mengetahui kategori pekerjaan
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  // Waktu kapan pekerjaan diposting
+  createdAt   DateTime @default(now())
+}
+// Definisi model untuk entitas Category
+model Category {
+  id          Int     @id @default(autoincrement())
+  name        String
+  // Relasi dengan entitas Job untuk mengetahui pekerjaan apa saja yang termasuk dalam kategori ini
+  jobs        Job[]
+}
+
 
