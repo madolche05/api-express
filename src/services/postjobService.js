@@ -48,9 +48,22 @@ const updateJob = async (jobId, title, description, company, location, salary, p
                 description,
                 company,
                 location,
-                salary,
-                postedById,
-                categoryId
+                salary: parseInt(salary, 10),
+                postedById: parseInt(postedById, 10),
+                categoryId: parseInt(categoryId, 10)
+            }
+        });
+        return job;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+const DeleteJob = async (jobId) => {
+    try {
+        const job = await prisma.job.delete({
+            where: {
+                id: parseInt(jobId)
             }
         });
         return job;
@@ -63,5 +76,7 @@ const updateJob = async (jobId, title, description, company, location, salary, p
 
 module.exports = {
     insertJob,
-    getJobs
+    getJobs,
+    updateJob,
+    DeleteJob
 }

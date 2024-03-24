@@ -9,6 +9,35 @@ const insertCategory = async (name) => {
     return category;
 }
 
+const getCategories = async () => {
+    const categories = await prisma.category.findMany();
+    return categories;
+}
+
+
+const updateCategory = async (id, name) => {
+    const category = await prisma.category.update({
+        where: {
+            id: parseInt(id)
+        },
+        data: {
+            name
+        }
+    });
+    return category;
+}
+
+const deleteCategory = async (id) => {
+    const category = await prisma.category.delete({
+        where: {
+            id
+        }
+    });
+    return category;
+}
 module.exports = {
-    insertCategory
+    insertCategory,
+    getCategories,
+    updateCategory,
+    deleteCategory
 }
